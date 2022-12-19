@@ -112,7 +112,7 @@ def lambda_handler(event, context):
 
     if jira_sev < int(severity_check):
         print(
-            f"The Alert have a severity of {severity} which is below the threshold set to send a message in Teams, ending run."
+            f"The Alert have a severity of {severity} which is below the threshold set to create a Jira ticket, ending run."
         )
         exit()
     else:
@@ -360,7 +360,7 @@ def lambda_handler(event, context):
     j_data = jira_response.json()
     key = jira_response.json()["key"]
 
-    url = f"https://jamfsoftware.atlassian.net/rest/api/3/issue/{key}/attachments"
+    url = f"{jamf_url}/rest/api/3/issue/{key}/attachments"
 
     headers = {"Accept": "application/json", "X-Atlassian-Token": "no-check"}
     attachments_response = requests.request(
